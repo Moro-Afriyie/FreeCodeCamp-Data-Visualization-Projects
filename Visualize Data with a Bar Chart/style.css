@@ -1,4 +1,10 @@
 body {
   margin: 0;
   padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  border: 1px solid red;
 }
