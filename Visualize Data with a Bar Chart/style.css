@@ -8,3 +8,9 @@ body {
 .container {
   border: 1px solid red;
 }
+#title h1 {
+  margin: 0;
+}
+.barchart-container {
+  border: 1px solid green;
+}
