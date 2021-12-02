@@ -24,4 +24,8 @@ d3.json(
 ).then((res) => {
   data = res.data;
   console.log("data: ", data);
+  drawCanvas();
+  generateScales();
+  drawBars();
+  generateAxis();
 });
