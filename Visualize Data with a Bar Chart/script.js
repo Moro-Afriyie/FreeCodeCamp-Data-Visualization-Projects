@@ -41,16 +41,15 @@ const generateScales = () => {
   xAxisScale = d3
     .scaleTime()
     .domain([d3.min(datesArray), d3.max(datesArray)])
-    .range([padding, width - padding]);
+    .range([padding + 20, width - padding]);
+
+  const maxGDP = d3.max(data, (item) => {
+    return item[1];
+  });
 
   yAxisScale = d3
     .scaleLinear()
-    .domain([
-      0,
-      d3.max(data, (item) => {
-        return item[1];
-      }),
-    ])
+    .domain([0, maxGDP])
     .range([height - padding, padding]);
 };
 
@@ -59,7 +58,19 @@ const drawBars = () => {};
 
 const generateAxis = () => {
   const xAxis = d3.axisBottom(xAxisScale);
-  svg.append("g").call(xAxis).attr("id", "x-axis");
+  const yAxis = d3.axisLeft(yAxisScale);
+
+  svg
+    .append("g")
+    .call(xAxis)
+    .attr("id", "x-axis")
+    .attr("transform", "translate(0," + (height - padding) + ")");
+
+  svg
+    .append("g")
+    .call(yAxis)
+    .attr("id", "y-axis")
+    .attr("transform", "translate(" + (padding + 20) + ",0)");
 };
 
 d3.json(
