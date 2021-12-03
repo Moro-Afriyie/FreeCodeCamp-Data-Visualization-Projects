@@ -32,7 +32,7 @@ const generateScales = () => {
   xScale = d3
     .scaleLinear()
     .domain([0, data.length - 1])
-    .range([padding, width - padding]);
+    .range([padding + 20, width - padding]);
 
   const datesArray = data.map((item) => {
     return new Date(item[0]);
@@ -54,7 +54,31 @@ const generateScales = () => {
 };
 
 // bars and tooltips will be drawn here
-const drawBars = () => {};
+const drawBars = () => {
+  svg
+    .selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("width", (width - 2 * padding) / data.length)
+    .attr("data-date", (item) => {
+      return item[0];
+    })
+    .attr("data-gdp", (item) => {
+      return item[1];
+    })
+    .attr("height", (item) => {
+      return heightScale(item[1]);
+    })
+    .attr("x", (item, index) => {
+      return xScale(index);
+    })
+    .attr("y", (item) => {
+      // push it down by the height and padding, then push it up by the heigth of the bar
+      return height - padding - heightScale(item[1]);
+    });
+};
 
 const generateAxis = () => {
   const xAxis = d3.axisBottom(xAxisScale);
