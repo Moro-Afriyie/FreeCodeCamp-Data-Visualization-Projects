@@ -55,6 +55,15 @@ const generateScales = () => {
 
 // bars and tooltips will be drawn here
 const drawBars = () => {
+  // create a tooltip
+  const tooltip = d3
+    .select("body")
+    .append("div")
+    .attr("id", "tooltip")
+    .style("visibility", "hidden")
+    .style("width", "auto")
+    .style("height", "auto");
+
   svg
     .selectAll("rect")
     .data(data)
@@ -77,6 +86,14 @@ const drawBars = () => {
     .attr("y", (item) => {
       // push it down by the height and padding, then push it up by the heigth of the bar
       return height - padding - heightScale(item[1]);
+    })
+    .on("mouseover", (item) => {
+      tooltip.style("visibility", "visible");
+      tooltip.tex(item[0]);
+      document.querySelector("#tooltip").setAttribute("data-date", item[0]);
+    })
+    .on("mouseout", (item) => {
+      tooltip.style("visibility", "hidden");
     });
 };
 
