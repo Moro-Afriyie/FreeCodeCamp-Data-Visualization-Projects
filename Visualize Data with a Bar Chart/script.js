@@ -88,8 +88,20 @@ const drawBars = () => {
       return height - padding - heightScale(item[1]);
     })
     .on("mouseover", (e, item) => {
-      tooltip.style("visibility", "visible");
-      tooltip.html(`<p>${item[0]}</p><p>${item[1]}</p>`);
+      i = data.indexOf(item);
+      console.log(i);
+      tooltip
+        .style("visibility", "visible")
+        .style("position", "absolute")
+        .style("top", height - 100 + "px")
+        .style("left", i * (width / 275) + 300 + "px")
+        .html(`<p>${item[0]}</p><p>${item[1]}</p>`);
+      // if (i >= 20) {
+      //   tooltip.style("left", i * (width / 275) + "px");
+      // } else {
+      //   tooltip.style("left", i * (width / 275) + 300 + "px");
+      // }
+
       document.querySelector("#tooltip").setAttribute("data-date", item[0]);
     })
     .on("mouseout", (item) => {
