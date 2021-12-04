@@ -87,9 +87,9 @@ const drawBars = () => {
       // push it down by the height and padding, then push it up by the heigth of the bar
       return height - padding - heightScale(item[1]);
     })
-    .on("mouseover", (item) => {
+    .on("mouseover", (e, item) => {
       tooltip.style("visibility", "visible");
-      tooltip.tex(item[0]);
+      tooltip.html(`<p>${item[0]}</p><p>${item[1]}</p>`);
       document.querySelector("#tooltip").setAttribute("data-date", item[0]);
     })
     .on("mouseout", (item) => {
