@@ -87,21 +87,15 @@ const drawBars = () => {
       // push it down by the height and padding, then push it up by the heigth of the bar
       return height - padding - heightScale(item[1]);
     })
-    .on("mouseover", (e, item) => {
+    .on("mouseover", (event, item) => {
       i = data.indexOf(item);
-      console.log(i);
+      console.log(event.pageX);
       tooltip
         .style("visibility", "visible")
         .style("position", "absolute")
         .style("top", height - 100 + "px")
-        .style("left", i * (width / 275) + 300 + "px")
+        .style("left", event.pageX + "px")
         .html(`<p>${item[0]}</p><p>${item[1]}</p>`);
-      // if (i >= 20) {
-      //   tooltip.style("left", i * (width / 275) + "px");
-      // } else {
-      //   tooltip.style("left", i * (width / 275) + 300 + "px");
-      // }
-
       document.querySelector("#tooltip").setAttribute("data-date", item[0]);
     })
     .on("mouseout", (item) => {
