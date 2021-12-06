@@ -10,7 +10,6 @@ body {
 }
 
 .container {
-  border: 1px solid red;
   position: relative;
   margin: 2rem auto;
   box-shadow: 0 0 1.125rem 0 rgba(0, 0, 0, 0.2),
@@ -21,9 +20,6 @@ body {
   margin: 0;
   text-align: center;
   font-weight: 400;
-}
-.barchart-container {
-  border: 1px solid green;
 }
 
 .bar {
