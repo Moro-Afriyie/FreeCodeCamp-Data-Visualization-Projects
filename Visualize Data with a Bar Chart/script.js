@@ -130,36 +130,3 @@ d3.json(
   generateAxis();
 });
 
-/*/**
- n = 5;
-numbers = {}
-sum_of_coresilience = 0;
-coresilience_array= {}
-newArr = []
-
-// Function to return gcd of a and b
-function gcd(a, b) {
-        if (a == 0)
-            return b;
-        return gcd(b % a, a);
-}
-for(let i =2; i<=n; i++){
-    let sum = 0;
-for(let j=1; j<i; j++){
-    if(gcd(i,j) == 1){
-        numbers[i]= sum+=1;
-    }
-}
-// if(gcd(i-numbers[i],i-1))
-coresilience_array[i]=`${i-numbers[i]}/${i-1}`
-if( i-numbers[i]===1 || (i-1)%(i-numbers[i]) === 0){
-  newArr.push(i);
-  sum_of_coresilience+=i;
-}
-}
-console.log(numbers)
-console.log(coresilience_array)
-console.log(newArr)
-console.log(sum_of_coresilience)
-
- */
