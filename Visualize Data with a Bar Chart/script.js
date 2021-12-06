@@ -93,8 +93,8 @@ const drawBars = () => {
       tooltip
         .style("visibility", "visible")
         .style("position", "absolute")
-        .style("top", height - 100 + "px")
-        .style("left", event.pageX + "px")
+        .style("top", height - 50 + "px")
+        .style("left", event.pageX + 10 + "px")
         .html(`<p>${item[0]}</p><p>${item[1]}</p>`);
       document.querySelector("#tooltip").setAttribute("data-date", item[0]);
     })
@@ -129,4 +129,3 @@ d3.json(
   drawBars();
   generateAxis();
 });
-
