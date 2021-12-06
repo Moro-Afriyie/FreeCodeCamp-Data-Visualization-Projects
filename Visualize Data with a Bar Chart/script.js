@@ -5,7 +5,7 @@ let data = [];
 const width = 800;
 const height = 600;
 const padding = 20;
-const svg = d3.select("svg"); // selects the svg tag
+const svg = d3.select("svg");
 let heightScale;
 let xScale;
 let xAxisScale;
@@ -124,7 +124,6 @@ d3.json(
   "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json"
 ).then((res) => {
   data = res.data;
-  console.log("data: ", data);
   drawCanvas();
   generateScales();
   drawBars();

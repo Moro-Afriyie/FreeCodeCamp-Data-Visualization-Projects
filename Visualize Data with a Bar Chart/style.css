@@ -11,7 +11,15 @@ body {
 }
 #title h1 {
   margin: 0;
+  text-align: center;
 }
 .barchart-container {
   border: 1px solid green;
+}
+
+.bar {
+  fill: #54a0ff;
+}
+.bar:hover {
+  fill: #2e86de;
 }
