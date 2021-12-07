@@ -53,6 +53,14 @@ const drawPoints = () => {
     .style("width", "auto")
     .style("height", "auto");
 
+  //   svg
+  //     .append("text")
+  //     .attr("transform", "rotate(-90)")
+  //     .attr("x", -200)
+  //     .attr("y", 10)
+  //     .style("font-size", 18)
+  //     .text("Time in Minutes");
+
   svg
     .selectAll("circle")
     .data(data)
