@@ -18,8 +18,29 @@ const drawCanvas = () => {
 };
 
 const generateScales = () => {
-  xScale = d3.scaleLinear().range([padding + 25, width - padding]);
-  yScale = d3.scaleTime().range([padding, height - padding]);
+  xScale = d3
+    .scaleLinear()
+    .domain([
+      d3.min(data, (item) => {
+        return item["Year"];
+      }) - 1,
+      d3.max(data, (item) => {
+        return item["Year"];
+      }) + 1,
+    ])
+    .range([padding, width - padding]);
+
+  yScale = d3
+    .scaleTime()
+    .domain([
+      d3.min(data, (item) => {
+        return new Date(item["Seconds"] * 1000);
+      }),
+      d3.max(data, (item) => {
+        return new Date(item["Seconds"] * 1000);
+      }),
+    ])
+    .range([padding, height - padding]);
 };
 
 const drawPoints = () => {
@@ -44,11 +65,17 @@ const drawPoints = () => {
     })
     .attr("data-yvalue", (item) => {
       return new Date(item["Seconds"] * 1000); // milliseconds
+    })
+    .attr("cx", (item) => {
+      return xScale(item["Year"]);
+    })
+    .attr("cy", (item) => {
+      return yScale(new Date(item["Seconds"] * 1000));
     });
 };
 
 const generateAxis = () => {
-  const xAxis = d3.axisBottom(xScale);
+  const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
   const yAxis = d3.axisLeft(yScale);
 
   svg
