@@ -9,8 +9,6 @@ const svg = d3.select("svg");
 const tooltip = d3.select("#tooltip");
 let xScale;
 let yScale;
-let xAxisScale;
-let yAxisScale;
 const timeFormat = d3.timeFormat("%M:%S");
 
 // set the width and height of the svg
@@ -46,23 +44,6 @@ const generateScales = () => {
 };
 
 const drawPoints = () => {
-  //   // create a tooltip
-  //   const tooltip = d3
-  //     .select("body")
-  //     .append("div")
-  //     .attr("id", "tooltip")
-  //     .style("visibility", "hidden")
-  //     .style("width", "auto")
-  //     .style("height", "auto");
-
-  //   svg
-  //     .append("text")
-  //     .attr("transform", "rotate(-90)")
-  //     .attr("x", -200)
-  //     .attr("y", 10)
-  //     .style("font-size", 18)
-  //     .text("Time in Minutes");
-
   svg
     .selectAll("circle")
     .data(data)
