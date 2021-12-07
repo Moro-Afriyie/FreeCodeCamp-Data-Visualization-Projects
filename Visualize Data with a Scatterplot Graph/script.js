@@ -28,7 +28,7 @@ const generateScales = () => {
         return item["Year"];
       }) + 1,
     ])
-    .range([padding, width - padding]);
+    .range([padding + 25, width - padding]);
 
   yScale = d3
     .scaleTime()
@@ -40,7 +40,7 @@ const generateScales = () => {
         return new Date(item["Seconds"] * 1000);
       }),
     ])
-    .range([padding, height - padding]);
+    .range([padding + 25, height - padding]);
 };
 
 const drawPoints = () => {
@@ -59,7 +59,7 @@ const drawPoints = () => {
     .enter()
     .append("circle")
     .attr("class", "dot")
-    .attr("r", "5")
+    .attr("r", "7")
     .attr("data-xvalue", (item) => {
       return item["Year"];
     })
@@ -71,12 +71,19 @@ const drawPoints = () => {
     })
     .attr("cy", (item) => {
       return yScale(new Date(item["Seconds"] * 1000));
+    })
+    .attr("fill", (item) => {
+      if (item["URL"] === "") {
+        return "lightgreen";
+      } else {
+        return "orange";
+      }
     });
 };
 
 const generateAxis = () => {
   const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
-  const yAxis = d3.axisLeft(yScale);
+  const yAxis = d3.axisLeft(yScale).tickFormat(d3.timeFormat("%M:%S"));
 
   svg
     .append("g")
@@ -93,7 +100,6 @@ const generateAxis = () => {
 
 d3.json(datasetURL).then((res) => {
   data = res;
-  console.log(data);
   drawCanvas();
   generateScales();
   drawPoints();
