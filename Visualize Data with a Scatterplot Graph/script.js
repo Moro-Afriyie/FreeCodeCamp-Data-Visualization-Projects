@@ -6,10 +6,12 @@ const width = 800;
 const height = 550;
 const padding = 20;
 const svg = d3.select("svg");
+const tooltip = d3.select("#tooltip");
 let xScale;
 let yScale;
 let xAxisScale;
 let yAxisScale;
+const timeFormat = d3.timeFormat("%M:%S");
 
 // set the width and height of the svg
 const drawCanvas = () => {
@@ -44,14 +46,14 @@ const generateScales = () => {
 };
 
 const drawPoints = () => {
-  // create a tooltip
-  const tooltip = d3
-    .select("body")
-    .append("div")
-    .attr("id", "tooltip")
-    .style("visibility", "hidden")
-    .style("width", "auto")
-    .style("height", "auto");
+  //   // create a tooltip
+  //   const tooltip = d3
+  //     .select("body")
+  //     .append("div")
+  //     .attr("id", "tooltip")
+  //     .style("visibility", "hidden")
+  //     .style("width", "auto")
+  //     .style("height", "auto");
 
   //   svg
   //     .append("text")
@@ -86,6 +88,30 @@ const drawPoints = () => {
       } else {
         return "orange";
       }
+    })
+    .on("mouseover", (event, item) => {
+      tooltip.transition().style("visibility", "visible");
+      tooltip
+        .html(
+          item.Name +
+            ": " +
+            item.Nationality +
+            "<br/>" +
+            "Year: " +
+            item.Year +
+            ", Time: " +
+            item.Time +
+            (item.Doping ? "<br/><br/>" + item.Doping : "")
+        )
+        .style("position", "absolute")
+        .style("width", "auto")
+        .style("height", "auto")
+        .style("left", event.pageX - 100 + "px")
+        .style("top", event.pageY - 28 + "px");
+      tooltip.attr("data-year", item["Year"]);
+    })
+    .on("mouseout", (item) => {
+      tooltip.transition().style("visibility", "hidden");
     });
 };
 
